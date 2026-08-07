@@ -4,7 +4,6 @@ Quick comparison figure: target image vs Shepard / Wendland / Gaussian outputs.
 Usage: edit the paths below, then run:
     python compare_kernels.py
 """
-
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
@@ -24,7 +23,6 @@ images = [
 ]
 
 fig, axes = plt.subplots(1, 4, figsize=(16, 4))
-
 for ax, (title, path) in zip(axes, images):
     img = mpimg.imread(path)
     ax.imshow(img)

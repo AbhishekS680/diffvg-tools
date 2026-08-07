@@ -5,6 +5,7 @@
 # the separate run_levels_*.py files -- the per-level loop and scoring now
 # live directly in this script.
 # Not part of the repo -- run manually from apps/.
+
 set -e  # stop if any step fails, so you notice rather than silently continuing
 
 ORIGINAL_BRANCH=$(git branch --show-current)
@@ -21,9 +22,11 @@ run_hop() {
     local target=$3
     local degraded=$4
     local hop_label=$5
+
     local outdir="results/${hop_label}/$method"
     echo "--- $method: $hop_label ---"
     python "$script" --target "$target" --degraded "$degraded" --outdir "$outdir"
+
     python -c "
 from score_results import score_path
 ssim_val, lpips_val, passed = score_path('$outdir/final.png', '$target')

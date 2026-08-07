@@ -14,7 +14,9 @@ LEVEL_IMAGES = {
     2: 'imgs/level_2.png',
     3: 'imgs/level_3.png',
 }
+
 METHODS = ['wendland_boxed', 'gaussian_boxed', 'shepard']  # can remove/add methods
+
 SSIM_THRESH = 0.9 # Above this is a pass
 LPIPS_THRESH = 0.1 # Below this is a pass
 
@@ -26,11 +28,9 @@ def get_lpips_model():
         _lpips_model = lpips.LPIPS(net='alex')
     return _lpips_model
 
-
 def to_lpips_tensor(img):
     t = torch.from_numpy(img).permute(2, 0, 1).unsqueeze(0).float()
     return t * 2 - 1  # lpips expects NCHW in [-1, 1]
-
 
 def score(reconstructed_np, target_np, ssim_thresh=SSIM_THRESH, lpips_thresh=LPIPS_THRESH):
     """reconstructed_np, target_np: HxWx3 float arrays in [0,1]. Returns (ssim, lpips, passed)."""
@@ -41,13 +41,11 @@ def score(reconstructed_np, target_np, ssim_thresh=SSIM_THRESH, lpips_thresh=LPI
     passed = (ssim_val > ssim_thresh) and (lpips_val < lpips_thresh)
     return ssim_val, lpips_val, passed
 
-
 def score_path(final_path, target_path, ssim_thresh=SSIM_THRESH, lpips_thresh=LPIPS_THRESH):
     """Convenience wrapper: load two image files and score them."""
     final_np = skimage.io.imread(final_path).astype(np.float32)[:, :, :3] / 255.0
     target_np = skimage.io.imread(target_path).astype(np.float32)[:, :, :3] / 255.0
     return score(final_np, target_np, ssim_thresh, lpips_thresh)
-
 
 def main():
     """Standalone sweep: baseline (degraded vs target, no reconstruction)
@@ -77,7 +75,6 @@ def main():
         if not os.path.exists(target_path):
             print(f"Missing target image: {target_path}, skipping level {n}->{n_minus_1}")
             continue
-
         for method in METHODS:
             final_path = f'results/level_{n}_to_{n_minus_1}/{method}/final.png'
             if not os.path.exists(final_path):
@@ -104,7 +101,6 @@ def main():
                 f.write(f"{r['level']} | {r['method']:9s} | SSIM={r['ssim']:.4f} "
                         f"LPIPS={r['lpips']:.4f} | PASS={r['passed']}\n")
     print('saved results/level_summary.txt')
-
 
 if __name__ == '__main__':
     main()
