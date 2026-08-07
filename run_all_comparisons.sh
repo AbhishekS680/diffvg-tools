@@ -11,10 +11,10 @@ set -e  # stop if any step fails, so you notice rather than silently continuing
 ORIGINAL_BRANCH=$(git branch --show-current)
 
 # 0 = original (sharpest), 3 = blurriest. Edit to match actual filenames.
-LEVEL_0="imgs/level_0.png"
-LEVEL_1="imgs/level_1.png"
-LEVEL_2="imgs/level_2.png"
-LEVEL_3="imgs/level_3.png"
+LEVEL_0="imgs/0.png"
+LEVEL_1="imgs/1.png"
+LEVEL_2="imgs/2.png"
+LEVEL_3="imgs/3.png"
 
 run_hop() {
     local method=$1

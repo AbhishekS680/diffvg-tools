@@ -9,10 +9,10 @@ import torch
 
 # 0 = original (sharpest), 3 = blurriest
 LEVEL_IMAGES = {
-    0: 'imgs/level_0.png',
-    1: 'imgs/level_1.png',
-    2: 'imgs/level_2.png',
-    3: 'imgs/level_3.png',
+    0: 'imgs/0.png',
+    1: 'imgs/1.png',
+    2: 'imgs/2.png',
+    3: 'imgs/3.png',
 }
 
 METHODS = ['wendland_boxed', 'gaussian_boxed', 'shepard']  # can remove/add methods
