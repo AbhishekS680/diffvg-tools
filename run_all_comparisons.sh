@@ -10,11 +10,12 @@ set -e  # stop if any step fails, so you notice rather than silently continuing
 
 ORIGINAL_BRANCH=$(git branch --show-current)
 
-# 0 = original (sharpest), 3 = blurriest. Edit to match actual filenames.
-LEVEL_0="imgs/0.png"
-LEVEL_1="imgs/1.png"
-LEVEL_2="imgs/2.png"
-LEVEL_3="imgs/3.png"
+# 0 = original (sharpest), 4 = blurriest. Edit to match actual filenames.
+LEVEL_0="imgs/level_0.png"
+LEVEL_1="imgs/level_1.png"
+LEVEL_2="imgs/level_2.png"
+LEVEL_3="imgs/level_3.png"
+LEVEL_4="imgs/level_4.png"
 
 run_hop() {
     local method=$1
@@ -37,6 +38,7 @@ print(f'[$hop_label] $method: SSIM={ssim_val:.4f} LPIPS={lpips_val:.4f} PASS={pa
 run_method() {
     local method=$1
     local script=$2
+    run_hop "$method" "$script" "$LEVEL_3" "$LEVEL_4" "level_4_to_3"
     run_hop "$method" "$script" "$LEVEL_2" "$LEVEL_3" "level_3_to_2"
     run_hop "$method" "$script" "$LEVEL_1" "$LEVEL_2" "level_2_to_1"
     run_hop "$method" "$script" "$LEVEL_0" "$LEVEL_1" "level_1_to_0"

@@ -7,12 +7,13 @@ from skimage.metrics import structural_similarity as ssim
 import lpips
 import torch
 
-# 0 = original (sharpest), 3 = blurriest
+# 0 = original (sharpest), 4 = blurriest
 LEVEL_IMAGES = {
-    0: 'imgs/0.png',
-    1: 'imgs/1.png',
-    2: 'imgs/2.png',
-    3: 'imgs/3.png',
+    0: 'imgs/level_0.png',
+    1: 'imgs/level_1.png',
+    2: 'imgs/level_2.png',
+    3: 'imgs/level_3.png',
+    4: 'imgs/level_4.png',
 }
 
 METHODS = ['wendland_boxed', 'gaussian_boxed', 'shepard']  # can remove/add methods
@@ -53,7 +54,7 @@ def main():
     results_log = []
 
     print("--- Baseline (degraded vs target, no reconstruction) ---")
-    for n in [3, 2, 1]:
+    for n in [4, 3, 2, 1]:
         n_minus_1 = n - 1
         target_path = LEVEL_IMAGES[n_minus_1]
         degraded_path = LEVEL_IMAGES[n]
@@ -69,7 +70,7 @@ def main():
               f"LPIPS={lpips_val:.4f} PASS={passed}")
 
     print("--- Reconstructions ---")
-    for n in [3, 2, 1]:
+    for n in [4, 3, 2, 1]:
         n_minus_1 = n - 1
         target_path = LEVEL_IMAGES[n_minus_1]
         if not os.path.exists(target_path):
