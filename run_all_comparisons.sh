@@ -11,11 +11,11 @@ set -e  # stop if any step fails, so you notice rather than silently continuing
 ORIGINAL_BRANCH=$(git branch --show-current)
 
 # 0 = original (sharpest), 4 = blurriest. Edit to match actual filenames.
-LEVEL_0="imgs/level_0.png"
-LEVEL_1="imgs/level_1.png"
-LEVEL_2="imgs/level_2.png"
-LEVEL_3="imgs/level_3.png"
-LEVEL_4="imgs/level_4.png"
+LEVEL_0="imgs/Cat/level_0.png"
+LEVEL_1="imgs/Cat/level_1.png"
+LEVEL_2="imgs/Cat/level_2.png"
+LEVEL_3="imgs/Cat/level_3.png"
+LEVEL_4="imgs/Cat/level_4.png"
 
 run_hop() {
     local method=$1
@@ -24,7 +24,7 @@ run_hop() {
     local degraded=$4
     local hop_label=$5
 
-    local outdir="results/${hop_label}/$method"
+    local outdir="results/Cat/${hop_label}/$method"
     echo "--- $method: $hop_label ---"
     python "$script" --target "$target" --degraded "$degraded" --outdir "$outdir"
 

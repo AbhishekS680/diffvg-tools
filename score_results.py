@@ -9,11 +9,11 @@ import torch
 
 # 0 = original (sharpest), 4 = blurriest
 LEVEL_IMAGES = {
-    0: 'imgs/level_0.png',
-    1: 'imgs/level_1.png',
-    2: 'imgs/level_2.png',
-    3: 'imgs/level_3.png',
-    4: 'imgs/level_4.png',
+    0: 'imgs/Cat/level_0.png',
+    1: 'imgs/Cat/level_1.png',
+    2: 'imgs/Cat/level_2.png',
+    3: 'imgs/Cat/level_3.png',
+    4: 'imgs/Cat/level_4.png',
 }
 
 METHODS = ['wendland_boxed', 'gaussian_boxed', 'shepard']  # can remove/add methods
@@ -77,7 +77,7 @@ def main():
             print(f"Missing target image: {target_path}, skipping level {n}->{n_minus_1}")
             continue
         for method in METHODS:
-            final_path = f'results/level_{n}_to_{n_minus_1}/{method}/final.png'
+            final_path = f'results/Cat/level_{n}_to_{n_minus_1}/{method}/final.png'
             if not os.path.exists(final_path):
                 print(f"[{n}->{n_minus_1}] {method}: no final.png found yet, skipping")
                 continue
@@ -89,8 +89,8 @@ def main():
             print(f"[{n}->{n_minus_1}] {method}: SSIM={ssim_val:.4f} "
                   f"LPIPS={lpips_val:.4f} PASS={passed}")
 
-    os.makedirs('results', exist_ok=True)
-    with open('results/level_summary.txt', 'w') as f:
+    os.makedirs('results/Cat', exist_ok=True)
+    with open('results/Cat/level_summary.txt', 'w') as f:
         f.write("--- Baseline (degraded vs target, no reconstruction) ---\n")
         for r in results_log:
             if r['method'] == 'baseline':
@@ -101,7 +101,7 @@ def main():
             if r['method'] != 'baseline':
                 f.write(f"{r['level']} | {r['method']:9s} | SSIM={r['ssim']:.4f} "
                         f"LPIPS={r['lpips']:.4f} | PASS={r['passed']}\n")
-    print('saved results/level_summary.txt')
+    print('saved results/Cat/level_summary.txt')
 
 if __name__ == '__main__':
     main()
