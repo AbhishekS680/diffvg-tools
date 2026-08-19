@@ -15,6 +15,9 @@ python wendland_rendering_boxed.py
 echo "=== Polynomial Kernel ==="
 python polynomial_kernel_rendering.py
 
+echo "=== diffvg Ellipse ==="
+python ellipse_diffvg.py
+
 echo "=== Gaussian ==="
 git checkout gaussian
 python gaussian_rendering.py
@@ -23,6 +26,11 @@ python gaussian_rendering_boxed.py
 echo "=== Shepard ==="
 git checkout shepard
 python shepard_rendering.py
+
+echo "=== Triangle Soup ==="
+git checkout trianglesoup
+python trianglesoup_rendering.py
+python trianglesoup_rendering_boxed.py
 
 echo "=== Restoring original branch: $ORIGINAL_BRANCH ==="
 git checkout "$ORIGINAL_BRANCH"
